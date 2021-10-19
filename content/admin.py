@@ -19,13 +19,13 @@ class HomepageAdmin(admin.ModelAdmin):
     list_display = ['founder_name_surname', 'central_phone', 'mail']
     list_display_links = ['founder_name_surname']
 
-    # Admin Kısmında yeni veri ekleme butonununu Kapatır
-    def has_add_permission(self, request):
-        return False
-
-    # Güncelleme Butonunu Kaldırı yalnızca veri Üzerinde Guncelleme Yapabilirsin
-    def has_delete_permission(self, request, obj=None):
-        return False
+    # # Admin Kısmında yeni veri ekleme butonununu Kapatır
+    # def has_add_permission(self, request):
+    #     return False
+    #
+    # # Güncelleme Butonunu Kaldırı yalnızca veri Üzerinde Guncelleme Yapabilirsin
+    # def has_delete_permission(self, request, obj=None):
+    #     return False
 
     class Meta:
         model = contentInput
@@ -87,13 +87,13 @@ class sendMessageAdmin(admin.ModelAdmin):
     list_display = ['name_surname','mail','subject']
     list_display_links = ['name_surname']
 
-    # Admin Kısmında yeni veri ekleme butonununu Kapatır
-    def has_add_permission(self, request):
-        return False
-
-    # Güncelleme Butonunu Kaldırı yalnızca veri Üzerinde Guncelleme Yapabilirsin
-    def has_update_permission(self, request):
-        return False
+    # # Admin Kısmında yeni veri ekleme butonununu Kapatır
+    # def has_add_permission(self, request):
+    #     return False
+    #
+    # # Güncelleme Butonunu Kaldırı yalnızca veri Üzerinde Guncelleme Yapabilirsin
+    # def has_update_permission(self, request):
+    #     return False
 
 
     class Meta:

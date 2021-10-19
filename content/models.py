@@ -9,7 +9,7 @@ from stdimage import StdImageField, JPEGField
 
 
 class contentInput(models.Model):
-    corporate_logo = models.ImageField(upload_to='home_page', verbose_name='Şirket logosu', max_length=255, blank=True,
+    corporate_logo = models.ImageField(upload_to='home_page', verbose_name='Şirket logosu', max_length=255,
                                        null=True)
     corporate_main_title = models.TextField(verbose_name='Kurumsal Ana Başlık Açıklama', max_length=500,
                                             blank=True, null=True)
@@ -25,7 +25,7 @@ class contentInput(models.Model):
                                          null=True)
     about_descriptions = RichTextField(verbose_name='Hakkımızda Açıklama', blank=True, null=True)
     about_image = StdImageField(upload_to='home_page/upload_images/about_images', max_length=255,
-                                verbose_name='Hakkımızda Resim', blank=True,
+                                verbose_name='Hakkımızda Resim',
                                 null=True, variations={
             'thumbnail': (1920, 1280, True),
         }, delete_orphans=True)
@@ -37,12 +37,13 @@ class contentInput(models.Model):
     branch_local_link = models.TextField(verbose_name='Şube Ofis Konum Linki', null=True, blank=True)
     instagram = models.CharField(verbose_name='Kurum Instagram Link', max_length=100, blank=True, null=True)
     twitter = models.CharField(verbose_name='Kurum Twitter Link', max_length=100, blank=True, null=True)
-    facebook = models.CharField(verbose_name=' Kurum Facebook Link', max_length=100, blank=True, null=True)
+    facebook = models.CharField(verbose_name=' Kurum Linkedin Link', max_length=100, blank=True, null=True)
     mail = models.CharField(verbose_name='Kurum Mail Address', max_length=100, blank=True, null=True)
 
-    # def delete(self, using=None, keep_parents=False):
-    #     self.founder_image.storage.delete(self.founder_image.name)
-    #     super().delete()
+    def delete(self, using=None, keep_parents=False):
+        self.corporate_logo.storage.delete(self.corporate_logo.name)
+        self.about_image.storage.delete(self.about_image.name)
+        super().delete()
 
     class Meta:
         verbose_name = "Anasayfa Bilgileri"
@@ -59,6 +60,10 @@ class ImagePost(models.Model):
             'thumbnail': (1920, 1280, True),
         }, delete_orphans=True)
 
+    def delete(self, using=None, keep_parents=False):
+        self.image.storage.delete(self.image.name)
+        super().delete()
+
     class Meta:
         verbose_name = "Slider İçerik Ekle"
         verbose_name_plural = 'Slider İçerik Ekle'
@@ -71,13 +76,17 @@ class Team(models.Model):
                                              null=True)
     instagram = models.CharField(verbose_name='Instagram Link', max_length=100, blank=True, null=True)
     twitter = models.CharField(verbose_name='Twitter Link', max_length=100, blank=True, null=True)
-    facebook = models.CharField(verbose_name='Facebook Link', max_length=100, blank=True, null=True)
+    facebook = models.CharField(verbose_name='Linkedin Link', max_length=100, blank=True, null=True)
     mail = models.CharField(verbose_name='Mail Address', max_length=100, blank=True, null=True)
     image = StdImageField(upload_to='home_page/upload_image/team_image', max_length=255,
                           verbose_name='Slider Resimleri',
                           null=True, variations={
             'thumbnail': (525, 350, True),
         }, delete_orphans=True)
+
+    def delete(self, using=None, keep_parents=False):
+        self.image.storage.delete(self.image.name)
+        super().delete()
 
     class Meta:
         verbose_name = "Ekip Adaylarını Ekle"
@@ -96,6 +105,10 @@ class Blog(models.Model):
             'thumbnail': (525, 350, True),
         }, delete_orphans=True)
 
+    def delete(self, using=None, keep_parents=False):
+        self.blog_image.storage.delete(self.blog_image.name)
+        super().delete()
+
     class Meta:
         verbose_name = 'Blog Haberleri Ekle'
         verbose_name_plural = 'Blog Haberleri Ekle'
@@ -109,6 +122,10 @@ class Corporate(models.Model):
                                     null=True, variations={
             'thumbnail': (1920, 1280, True),
         }, delete_orphans=True)
+
+    def delete(self, using=None, keep_parents=False):
+        self.corporate_image.storage.delete(self.corporate_image.name)
+        super().delete()
 
     class Meta:
         verbose_name = 'Kurumsal Alanı Bilgileri(Kurucu,Felsefe vb ...)'
@@ -124,6 +141,10 @@ class Software(models.Model):
                                    null=True, variations={
             'thumbnail': (1920, 1280, True),
         }, delete_orphans=True)
+
+    def delete(self, using=None, keep_parents=False):
+        self.software_image.storage.delete(self.software_image.name)
+        super().delete()
 
     class Meta:
         verbose_name = 'Yazılım Alanı Bilgileri'
