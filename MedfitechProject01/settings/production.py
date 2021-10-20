@@ -9,7 +9,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'medfitech_db',
         'USER': 'medfitech',
-        'PASSWORD': 'parola123',
+        'PASSWORD': '12345678',
         'HOST': 'localhost',
         'PORT': '',
 
